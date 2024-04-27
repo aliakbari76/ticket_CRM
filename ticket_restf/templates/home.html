@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% block content %} {% if user.is_authenticated %}
+<script>
+  function filterTable() {
+    console.log("text changed");
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search-input");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("ticket-table");
+    tr = table.getElementsByClassName("table_data");
+    console.log(tr)
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td");
+      found = false;
+      for (j = 0; j < td.length; j++) {
+        if (td[j]) {
+          txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (found) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+</script>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <h1>Tickets ...</h1>
+    </div>
+    <div class="col-8">
+      <div class="input-group rounded">
+        <input
+          type="search"
+          id="search-input"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+          onkeyup="filterTable()"
+        />
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table" id="ticket-table">
+  {% comment %}
+  <input
+    type="text"
+    id="search-input"
+    placeholder="Search..."
+    onkeyup="filterTable()"
+  />
+  {% endcomment %}
+
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Serial Number</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Description</th>
+      <th scope="col">File</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if tickets %} {% for ticket in tickets %}
+    <tr class="table_data">
+      <td>{{ticket.name}}</td>
+      <td>{{ticket.serial_number}}</td>
+      <td>{{ticket.phone}}</td>
+      <td>{{ticket.description}}</td>
+      <td><a href="{% url 'download_file' ticket.id %}">Download File</a></td>
+      <td>
+        <a href="{% url 'delete_ticket' ticket.id %}"
+          ><button type="button" class="btn btn-outline-dark">Delete</button></a
+        >
+      </td>
+    </tr>
+    {% endfor %} {% endif %}
+  </tbody>
+</table>
+
+{% else %}
+
+<h1>Login</h1>
+<form method="POST" action="{% url 'home' %}">
+  {% csrf_token %} {% include "loginForm.html" %}
+</form>
+{% endif %} {% endblock content %}
