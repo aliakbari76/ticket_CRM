@@ -4,6 +4,7 @@ from django.db import models
 
 class Ticket(models.Model):
     name = models.CharField(max_length=50)
+    device = models.CharField(max_length=50 , default= "unknows")
     phone = models.CharField(max_length=12 ,default='no phone')
     serial_number = models.CharField(max_length=12)
     description = models.CharField(max_length=500)

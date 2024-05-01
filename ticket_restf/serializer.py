@@ -5,4 +5,4 @@ class TicketSerializer(serializers.ModelSerializer):
     file = serializers.FileField()
     class Meta:
         model = Ticket
-        fields = ['name' ,'phone', 'serial_number' , 'description' , 'file']
+        fields = ['name' ,'device','phone', 'serial_number' , 'description' , 'file']

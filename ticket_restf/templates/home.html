@@ -65,9 +65,10 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
+      <th scope="col">device</th>
       <th scope="col">Serial Number</th>
       <th scope="col">Phone</th>
-      <th scope="col">Description</th>
+      <th scope="col-6">Description</th>
       <th scope="col">File</th>
     </tr>
   </thead>
@@ -75,6 +76,7 @@
     {% if tickets %} {% for ticket in tickets %}
     <tr class="table_data">
       <td>{{ticket.name}}</td>
+      <td>{{ticket.device}}</td>
       <td>{{ticket.serial_number}}</td>
       <td>{{ticket.phone}}</td>
       <td>{{ticket.description}}</td>

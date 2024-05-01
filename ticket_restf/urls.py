@@ -5,6 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.home , name='home'),
+    path('ecuprog2',views.ecuprog_tickets , name='ecuprog2'),
+    path('negaremap',views.negaremap_tickets , name='negaremap'),
     path('logout/', views.logout_user , name='logout_user'),
     path('api/all_tickets/' , views.getData),
     path('api/receive_ticket/' , views.postData),
