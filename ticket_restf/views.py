@@ -79,6 +79,7 @@ def postData(request):
         'device':request.data.get('device'),
         'serial_number' : request.data.get('serial_number'),
         'phone' : request.data.get('phone'),
+        'label' : request.data.get('label'),
         'description': request.data.get('description'),
         'file':file
     }

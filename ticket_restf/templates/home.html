@@ -64,23 +64,30 @@
 
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">device</th>
-      <th scope="col">Serial Number</th>
-      <th scope="col">Phone</th>
+      <th scope="col-2">ID</th>
+      <th scope="col-2">Name</th>
+      <th scope="col-2">device</th>
+      <th scope="col-2">Serial Number</th>
+      <th scope="col-2">Phone</th>
+      <th scope="col-2">Label</th>
       <th scope="col-6">Description</th>
-      <th scope="col">File</th>
+      <th scope="col-2">File</th>
+      <th scope="col-2">Time </th>
     </tr>
   </thead>
   <tbody>
     {% if tickets %} {% for ticket in tickets %}
     <tr class="table_data">
+      <td>{{ticket.id}}</td>
       <td>{{ticket.name}}</td>
       <td>{{ticket.device}}</td>
       <td>{{ticket.serial_number}}</td>
       <td>{{ticket.phone}}</td>
+      <td>{{ticket.label}}</td>
       <td>{{ticket.description}}</td>
+
       <td><a href="{% url 'download_file' ticket.id %}">Download File</a></td>
+      <td>{{ticket.created_at}}</td>
       <td>
         <a href="{% url 'delete_ticket' ticket.id %}"
           ><button type="button" class="btn btn-outline-dark">Delete</button></a
